@@ -1,5 +1,12 @@
 import strformat, strutils
-from unicode import runeLen
+from unicode import runeLen, toRunes, toUTF8
+
+func runeLen(s: string): int =
+  for rune in s.toRunes:
+    if rune.toUTF8.len == 1:
+      result += 1
+    else:
+      result += 2
 
 type Cell* = ref object
   leftpad*: int
