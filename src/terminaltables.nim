@@ -1,7 +1,7 @@
 import strformat, strutils
 from unicode import runeLen, toRunes, toUTF8
 
-func runeLen(s: string): int =
+func runeLenForTerminal(s: string): int =
   for rune in s.toRunes:
     if rune.toUTF8.len == 1:
       result += 1
@@ -27,7 +27,7 @@ proc newCellFromAnother(another: Cell): Cell =
   result = newCell(another.text, another.leftpad, another.rightpad)
 
 proc len*(this: Cell): int =
-  result = this.leftpad + this.text.runeLen + this.rightpad
+  result = this.leftpad + this.text.runeLenForTerminal + this.rightpad
 
 proc `$`*(this:Cell): string =
   result = " ".repeat(this.leftpad) & this.text & " ".repeat(this.rightpad)
